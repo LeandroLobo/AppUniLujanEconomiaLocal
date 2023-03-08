@@ -2,3 +2,15 @@
     overflow-wrap: break-word !important;
     overflow-x: hidden;
 }
+.banner-rounded{
+    border-radius: 1rem;
+    transition: all .2s ease-in-out;
+}
+.banner-rounded:hover{
+    transform: scale(1.03);
+}
+.float-tag-estado{
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}

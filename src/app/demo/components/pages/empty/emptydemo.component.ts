@@ -28,7 +28,6 @@ export class EmptyDemoComponent {
     barOptions: any;
     subscription: Subscription;
 
-    convocatoriasApiUrl = 'https://www.cultura.gob.ar/api/v2.0/convocatorias/?format=json&limit=8&offset=';
 
     getValoresInflacion() {
         const headers = new HttpHeaders({
@@ -39,19 +38,13 @@ export class EmptyDemoComponent {
         }));
     }
 
-    getConvocatorias() {
-        let offset = 0;
-        return this.http.get(this.convocatoriasApiUrl + offset).pipe(map((response: any) => {
-            return response;
-        }));
-    }
+
 
     ngOnInit() {
         this.getValoresInflacion().subscribe(res => {
             this.apiData = res;
             this.initCharts()
         });
-        this.getConvocatorias().subscribe(res => console.log(res));
     }
 
     initCharts() {
