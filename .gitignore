@@ -33,6 +33,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+git-comandos.txt
 
 # System files
 .DS_Store

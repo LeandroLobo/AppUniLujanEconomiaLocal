@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { map, Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { environment } from 'src/environments/environment';
@@ -10,9 +11,10 @@ interface ApiData {
 }
 @Component({
     templateUrl: './emptydemo.component.html',
+    providers: [MessageService]
 })
 export class EmptyDemoComponent {
-    constructor(private http: HttpClient, public layoutService: LayoutService) {
+    constructor(private http: HttpClient, public layoutService: LayoutService, private messageService: MessageService) {
         this.subscription = this.layoutService.configUpdate$.subscribe(config => {
             this.initCharts();
         });
@@ -41,10 +43,19 @@ export class EmptyDemoComponent {
 
 
     ngOnInit() {
-        this.getValoresInflacion().subscribe(res => {
-            this.apiData = res;
-            this.initCharts()
-        });
+        this.getValoresInflacion().subscribe(
+            res => {
+                this.apiData = res;
+                this.initCharts();
+            },
+            (err) => {
+                this.messageService.addAll([
+                    {severity:'error', summary: 'Error en la consulta a la API', detail: err.error, sticky: true},
+                    {severity:'warn', summary: 'Los valores en las tablas no son reales', detail: 'Se muestran datos de testing, para no perder la vista de la gráfica, ', sticky: true}
+                ]);
+                this.initCharts();
+            },
+        );
     }
 
     initCharts() {
@@ -53,8 +64,10 @@ export class EmptyDemoComponent {
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
-        const data2022: number[] = this.apiData.filter(data => data.d.split('-').includes('2022')).map(d => d.v);
-        const data2021: number[] = this.apiData.filter(data => data.d.split('-').includes('2021')).map(d => d.v);
+        let data2022: number[] = this.apiData.filter(data => data.d.split('-').includes('2022')).map(d => d.v);
+        if (data2022.length === 0) data2022 = [75,67,67,70,78,90,70,60,50,40,30,20];
+        let data2021: number[] = this.apiData.filter(data => data.d.split('-').includes('2021')).map(d => d.v);
+        if (data2021.length === 0) data2021 = [46,46,38,98,9,45,36,57,27,31,84,46];
 
         this.barData = {
             labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],

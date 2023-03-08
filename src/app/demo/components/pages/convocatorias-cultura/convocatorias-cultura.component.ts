@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { DataView } from 'primeng/dataview';
 import { map } from 'rxjs';
 
@@ -20,7 +21,8 @@ interface Convocatoria {
 @Component({
   selector: 'app-convocatorias-cultura',
   templateUrl: './convocatorias-cultura.component.html',
-  styleUrls: ['./convocatorias-cultura.component.scss']
+  styleUrls: ['./convocatorias-cultura.component.scss'],
+  providers: [MessageService]
 })
 export class ConvocatoriasCulturaComponent {
 
@@ -30,10 +32,17 @@ export class ConvocatoriasCulturaComponent {
     convocatorias: Convocatoria[] = [];
 
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private messageService: MessageService) { }
 
     ngOnInit() {
-        this.getConvocatorias().subscribe((data: Convocatoria[]) => this.convocatorias = data)
+        this.getConvocatorias().subscribe(
+            (data: Convocatoria[]) => {
+                this.convocatorias = data;
+            },
+            (err) => {
+                this.messageService.add({severity:'error', summary: 'Error en la consulta a la API', detail: err.error, sticky: true});
+            },
+        );
     }
 
     getConvocatorias() {

@@ -1,6 +1,6 @@
 {
-  "name": "sakai-ng",
-  "version": "15.0.0",
+  "name": "demo-app-unlu",
+  "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -42,6 +42,7 @@
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/parser": "5.37.0",
+    "angular-cli-ghpages": "^1.0.5",
     "eslint": "^8.23.1",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
