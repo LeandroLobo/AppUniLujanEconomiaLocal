@@ -13,8 +13,18 @@
     </button>
 
     <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <p-menu #profileMenu [popup]="true" [model]="profileMenuItems"></p-menu>
-        <button class="p-link layout-topbar-button" (click)="profileMenu.toggle($event)">
+
+        <button class="p-link layout-topbar-button" *ngIf="layoutService.state.profileSidebarVisible" (click)="openProfileEdit()">
+            <i class="pi pi-user-edit"></i>
+            <span>Editar Perfil</span>
+        </button>
+        <button class="p-link layout-topbar-button" *ngIf="layoutService.state.profileSidebarVisible" (click)="logOut()">
+            <i class="pi pi-power-off"></i>
+            <span>Cerrar Sesión</span>
+        </button>
+
+        <p-menu #profileMenu [popup]="true" [model]="profileMenuItems" class="visible" [ngClass]="{'invisible': layoutService.state.profileSidebarVisible}"></p-menu>
+        <button class="p-link layout-topbar-button visible" (click)="profileMenu.toggle($event)" [ngClass]="{'invisible': layoutService.state.profileSidebarVisible}">
             <i class="pi pi-user"></i>
             <span>Perfil</span>
         </button>

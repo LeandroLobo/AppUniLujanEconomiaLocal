@@ -3,20 +3,7 @@ import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DataView } from 'primeng/dataview';
 import { map } from 'rxjs';
-
-interface Convocatoria {
-    id:           number;
-    url:          string;
-    link:         string;
-    imagen:       string;
-    titulo:       string;
-    bajada:       string;
-    cuerpo:       string;
-    estado:       string;
-    fecha_inicio: Date;
-    fecha_fin:    Date;
-    documentos:   string[];
-}
+import { Convocatoria } from '../_core/models/convocatoria.model';
 
 @Component({
   selector: 'app-convocatorias-cultura',
