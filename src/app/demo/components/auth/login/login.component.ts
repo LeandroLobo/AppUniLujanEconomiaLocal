@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+import { LoginStorageService } from './../services/login-storage.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-login',
@@ -11,13 +13,29 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
             margin-right: 1rem;
             color: var(--primary-color) !important;
         }
-    `]
+    `],
+    providers: [MessageService]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
     valCheck: string[] = ['remember'];
 
     password!: string;
+    user!: string;
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(private loginStorage: LoginStorageService, private router: Router, private messageService: MessageService) {}
+
+    ngOnInit(): void {
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        //Add 'implements OnInit' to the class.
+
+    }
+    login() {
+        if(this.user === 'unlu' && this.password === '1234') {
+            this.loginStorage.setIsAuthenticated(true);
+            this.router.navigateByUrl('');
+        } else {
+            this.messageService.add({severity:'warn', summary:'Acceso Denegado', detail:'El Usuario y/o la contraseña son incorrectos.'});
+        }
+    }
 }

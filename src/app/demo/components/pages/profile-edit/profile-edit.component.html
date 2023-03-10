@@ -1,0 +1,23 @@
+<div class="card p-fluid">
+    <h5>Información de Perfil</h5>
+    <div class="field">
+        <label htmlFor="newName">Nombre</label>
+        <input pInputText id="newName" type="text" [(ngModel)]="newName"/>
+    </div>
+    <div class="field">
+        <label htmlFor="newLastName">Apellido</label>
+        <input pInputText id="newLastName" type="text" [(ngModel)]="newLastName"/>
+    </div>
+    <div class="field">
+        <label htmlFor="newEmail">Email</label>
+        <input [(ngModel)]="newEmail" pInputText id="newEmail" type="text"/>
+    </div>
+    <div class="field">
+        <label htmlFor="newPassword">Contraseña</label>
+        <input pInputText id="newPassword" type="text" [(ngModel)]="newPassword"/>
+    </div>
+
+</div>
+<div class="flex flex-column align-items-center justify-content-center">
+    <p-button label="Guardar" (onClick)="backToDashboard()" styleClass="p-button-lg"></p-button>
+</div>

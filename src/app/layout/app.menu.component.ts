@@ -41,7 +41,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Analisis Estadístico',
                                 icon: 'pi pi-fw pi-chart-line',
-                                routerLink: ['/pages/cultura-analisis']
+                                routerLink: ['/pages/estadisticas-cultura']
                             },
                         ],
                     },

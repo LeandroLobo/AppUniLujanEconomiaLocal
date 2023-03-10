@@ -18,6 +18,7 @@ export class EmptyDemoComponent {
         this.subscription = this.layoutService.configUpdate$.subscribe(config => {
             this.initCharts();
         });
+
     }
 
     inflacionApiUrl = 'https://api.estadisticasbcra.com/inflacion_interanual_oficial';
