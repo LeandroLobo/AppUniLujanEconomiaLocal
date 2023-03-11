@@ -1,0 +1,58 @@
+<p-toast></p-toast>
+<div class="grid">
+    <div class="col-12 lg:col-6">
+        <div class="card">
+            <h5>Estadísticas Actividad Cultural</h5>
+            <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                <li class="flex align-items-center py-2 border-bottom-1 surface-border">
+                    <div class="mr-3">
+                        <i class="pi pi-calendar text-xl text-blue-500"></i>
+                    </div>
+                    <p class="text-900 line-height-3">Las convocatorias son llamados abiertos a la comunidad, para inscribirse y participar de distintas actividades culturales a lo largo de toda la nación, por ejemplo, talleres de dibujo, convocatorias de músicos para eventos públicos o para artistas de todo tipo en diferentes exposiciones en museos o instituciones públicas, diplomaturas y postgrados en materias relacionadas con la literatura, y mucho más.</p>
+                </li>
+                <li class="flex align-items-center py-2 border-bottom-1 surface-border">
+                    <div class="mr-3">
+                        <i class="pi pi-chart-line text-xl text-black-500"></i>
+                    </div>
+                    <p class="text-700 line-height-3 overflow-wrap-break-word">Decidí utilizar esta información para evaluar la cantidad de actividades culturales al mes, y porque no, y ademas anualmente, con la idea de intentar responder estas preguntas:</p>
+                </li>
+                <li class="flex align-items-center py-2 border-bottom-1 surface-border">
+                    <div class="mr-3">
+                        <i class="pi pi-question text-xl text-orange-500"></i>
+                    </div>
+                    <div class="col-12">
+                        <ul>
+                            <li>¿En que epoca del año hay mas movimiento?</li>
+                            <li>¿Durante los ultimos 5 años, la actividad cultural está creciendo o decreciendo?</li>
+                            <li>¿De los últimos 5 años, cual fue el que mas actividad tuvo?</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="flex align-items-center py-2">
+                    <div class="mr-3">
+                        <i class="pi pi-thumbs-up text-xl text-green-500"></i>
+                    </div>
+                    <p class="text-700 line-height-3 overflow-wrap-break-word">Los siguientes gráficos intentaran guiar al usuario de la app a establecer una opinion basada en datos estadísticos, y sirven como ejemplo de lo que podría llegar a establecerce como un indicador del crecimiento o decrecimiento de la actividad cultural en el país.</p>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="!loadingData">
+            <div class="card">
+                <h5>Actividad trimestral últimos 5 años</h5>
+                <p-chart type="bar" [data]="actividadTrimestralData" [options]="actividadTrimestralOptions"></p-chart>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="loadingData" class="col-12 lg:col-6 flex flex-column align-items-center justify-content-center">
+        <h5>Cargando datos...</h5>
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+    <div class="col-12 px-6 lg:col-6 lg:px-1" *ngIf="!loadingData">
+        <div class="card">
+            <h5>Actividad total anual</h5>
+            <p-chart type="doughnut" [data]="actividadAnualData" [options]="actividadAnualOptions"></p-chart>
+        </div>
+    </div>
+
+</div>

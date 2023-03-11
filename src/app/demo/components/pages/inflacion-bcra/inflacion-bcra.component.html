@@ -1,0 +1,36 @@
+<p-toast></p-toast>
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Inflacion interanual</h5>
+            <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                <li class="flex align-items-center py-2 border-bottom-1 surface-border">
+                    <div class="mr-3">
+                        <i class="pi pi-file-import text-xl text-blue-500"></i>
+                    </div>
+                    <span class="text-900 line-height-3">Datos obtenidos de la API del banco central de la republica argentina.</span>
+                </li>
+                <li class="flex align-items-center py-2">
+                    <div class="mr-3">
+                        <i class="pi pi-server text-xl text-orange-500"></i>
+                    </div>
+                    <span class="text-700 line-height-3 overflow-wrap-break-word">Api Url: https://api.estadisticasbcra.com/inflacion_interanual_oficial</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6">
+        <div class="card">
+            <h5>Comparación 2021 - 2022</h5>
+            <span class="block text-600 font-medium mb-3">Gráfico estilo 'Linear Chart'</span>
+            <p-chart type="line" [data]="lineData" [options]="lineOptions"></p-chart>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6">
+        <div class="card">
+            <h5>Comparación 2021 - 2022</h5>
+            <span class="block text-600 font-medium mb-3">Gráfico estilo 'Bar Chart'</span>
+            <p-chart type="bar" [data]="barData" [options]="barOptions"></p-chart>
+        </div>
+    </div>
+</div>

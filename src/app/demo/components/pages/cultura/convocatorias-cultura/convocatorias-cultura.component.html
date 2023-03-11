@@ -1,0 +1,83 @@
+<p-toast></p-toast>
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+
+			<h4>Convocatorias - Ministerio de cultura de la nación</h4>
+            <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                <li class="flex align-items-center py-2 border-bottom-1 surface-border">
+                    <div class="mr-3">
+                        <i class="pi pi-file-import text-xl text-blue-500"></i>
+                    </div>
+			        <span class="text-700 line-height-3 overflow-wrap-break-word">Datos obtenidos de la API del ministerio de cultura de la nación.</span>
+                </li>
+                <li class="flex align-items-center py-2">
+                    <div class="mr-3">
+                        <i class="pi pi-server text-xl text-orange-500"></i>
+                    </div>
+                    <span class="text-700 line-height-3 overflow-wrap-break-word">Api Url: https://www.cultura.gob.ar/api/v2.0/convocatorias</span>
+                </li>
+            </ul>
+
+			<p-dataView #dv [value]="convocatorias" [paginator]="true" [rows]="6" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+				<ng-template pTemplate="header">
+					<div class="flex flex-column md:flex-row md:justify-content-between gap-2">
+						<p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+					</div>
+				</ng-template>
+
+				<ng-template let-convocatoria pTemplate="listItem">
+					<div class="col-12">
+                        <a [href]="convocatoria.link" target="_blank" [style]="{'text-decoration-color':'none'}">
+                            <div class="flex flex-column md:flex-row align-items-center p-3 w-full">
+                                <img [src]="convocatoria.imagen" [alt]="convocatoria.titulo" class="my-4 md:my-0 w-9 md:w-10rem shadow-2 mr-5"/>
+                                <div class="flex-1 flex flex-column align-items-center text-center md:text-left mr-3">
+                                    <div class="font-bold text-2xl">{{convocatoria.titulo}}</div>
+                                    <div class="mb-2">{{convocatoria.bajada}}</div>
+                                    <div class="flex align-items-center mt-2">
+                                        <p>
+                                            Inscripción:
+                                            <span class="font-semibold">{{convocatoria.fecha_inicio | date: 'd/M/yy'}}</span>
+                                             - Inicio:
+                                            <span class="font-semibold">{{convocatoria.fecha_fin | date: 'd/M/yy'}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
+                                    <span [class]="'product-badge ' + getClass(convocatoria.estado)">{{convocatoria.estado}}</span>
+                                </div>
+                            </div>
+                        </a>
+					</div>
+				</ng-template>
+
+				<ng-template let-convocatoria pTemplate="gridItem">
+					<div class="col-12 md:col-4 p-3">
+                        <a [href]="convocatoria.link" target="_blank">
+                            <p-card [header]="convocatoria.titulo" [subheader]="convocatoria.bajada" styleClass="p-card-shadow" [style]="{'min-height': '34rem', 'position':'relative'}">
+                                <ng-template pTemplate="header">
+                                    <div class="float-tag-estado">
+                                        <span [class]="'product-badge ' + getClass(convocatoria.estado)">{{convocatoria.estado}}</span>
+                                    </div>
+                                    <img alt="Card" [src]="convocatoria.imagen" [style]="{'height': '12rem', 'object-fit': 'cover'}" [alt]="convocatoria.titulo">
+                                </ng-template>
+                                <ng-template pTemplate="footer">
+                                    <div class="flex align-items-center justify-content-center mt-2">
+                                        <p>
+                                            Inscripción:
+                                            <span class="font-semibold">{{convocatoria.fecha_inicio | date: 'd/M/yy'}}</span>
+                                             - Inicio:
+                                            <span class="font-semibold">{{convocatoria.fecha_fin | date: 'd/M/yy'}}</span>
+                                        </p>
+                                    </div>
+                                </ng-template>
+                            </p-card>
+                        </a>
+                    </div>
+				</ng-template>
+
+			</p-dataView>
+		</div>
+	</div>
+
+</div>

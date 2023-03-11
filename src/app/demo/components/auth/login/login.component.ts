@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit{
 
     }
     login() {
-        if(this.user === 'unlu' && this.password === '1234') {
+        if(this.user === 'admin' && this.password === '1234') {
             this.loginStorage.setIsAuthenticated(true);
             this.router.navigateByUrl('');
         } else {
